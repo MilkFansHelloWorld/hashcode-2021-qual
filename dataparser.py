@@ -67,6 +67,8 @@ def get_args():
     parser.add_argument('inp', nargs='?')
     return parser.parse_args()
 
+
+"""
 inp = '''6 4 5 2 1000
 2 0 rue-de-londres 1
 0 1 rue-d-amsterdam 1
@@ -76,5 +78,5 @@ inp = '''6 4 5 2 1000
 4 rue-de-londres rue-d-amsterdam rue-de-moscou rue-de-rome
 3 rue-d-athenes rue-de-moscou rue-de-londres'''
 
-parse(inp)
+parse(inp)"""
 
