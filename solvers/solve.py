@@ -13,6 +13,8 @@ def solve(inp, args):
     random.seed(args['seed'])
     ns = parse(inp)
 
+
+
     return '0'
 
 if __name__ == '__main__':
