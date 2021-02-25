@@ -32,13 +32,14 @@ def solve(inp, args):
     graph = Graph(ns.streets)
     output = {}
     for E, incoming_streets in graph.adj_list_to_E.items():
-        output[E] = {'E_i':1, 'street': incoming_streets[0]}
+        output[E] = {'E_i':len(incoming_streets), 'street': incoming_streets}
     res = []
     res.append(len(output))
     for E, o in output.items():
         res.append(E)
         res.append(o['E_i'])
-        res.append('{} {}'.format(o['street'][0].name, 1))
+        for (street, q) in o['street']:
+            res.append('{} {}'.format(street.name, 1))
     return '\n'.join(map(str, res))
 
 if __name__ == '__main__':
