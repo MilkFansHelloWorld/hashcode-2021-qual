@@ -22,3 +22,4 @@ if __name__ == '__main__':
     inp = get_in_file_content(args.in_file)
     out = solve(inp, {'seed': 0})
     print('\n'.join(['OUT:', '=========', out]))
+
