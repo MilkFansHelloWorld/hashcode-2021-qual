@@ -44,19 +44,27 @@ def solve(inp, args):
     res = []
     res.append(len(output))
     for E, o in output.items():
-        res.append(E)
-        res.append(o['E_i'])
         # check which streets are the most frequently used
-        street_list = [(street.name, street_freqs.get(street.name, 0)) for (street, _) in o['street']]
-        street_list.sort(key=lambda el: el[1], reverse= True)
-        print(street_list)
-        max_freq = street_list[0][1]
-        min_freq = street_list[-1][1]
-        street_list_corrected = [(street_name, 1) for (index, (street_name, freq)) in enumerate(street_list)]
-        lambda_val = min(10, ns.D/100)
-        #street_list_corrected = [(street_name, max(1, int(lambda_val*math.exp(-lambda_val*index)))) for (index, (street_name, freq)) in enumerate(street_list)]
-        for (street_name, corrected_freq) in street_list_corrected:
-            res.append('{} {}'.format(street_name, max(corrected_freq, 1)))
+        #street_list = [(street.name, street_freqs.get(street.name, 0)) for (street, _) in o['street']]
+        street_list = []
+        for (street, _) in o['street']:
+            if not (street.name not in street_freqs or street_freqs[street.name]==0):
+                street_list.append((street.name, street_freqs[street.name]))
+        if len(street_list) < 1:
+            res[0]-=1
+        else:
+            res.append(E)
+            res.append(len(street_list))
+            street_list.sort(key=lambda el: el[1], reverse=True)
+            # print(street_list)
+            # max_freq = street_list[0][1]
+            # min_freq = street_list[-1][1]
+            street_list_corrected = [(street_name, freq) for (index, (street_name, freq)) in enumerate(street_list)]
+            # street_list_corrected = [(street_name, 1) for (index, (street_name, freq)) in enumerate(street_list)]
+            lambda_val = min(10, ns.D / 100)
+            # street_list_corrected = [(street_name, max(1, int(lambda_val*math.exp(-lambda_val*index)))) for (index, (street_name, freq)) in enumerate(street_list)]
+            for (street_name, corrected_freq) in street_list_corrected:
+                res.append('{} {}'.format(street_name, max(corrected_freq, 1)))
     return '\n'.join(map(str, res))
 
 if __name__ == '__main__':
@@ -65,5 +73,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
     inp = get_in_file_content(args.in_file)
     out = solve(inp, {'seed': 0})
-    #print(out)
+    print(out)
 
