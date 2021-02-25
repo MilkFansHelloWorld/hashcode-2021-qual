@@ -34,17 +34,17 @@ def parse(inp):
     streets = {}
     for _ in range(ns.S):
         temp = next(itr).split()
-        B = temp[0]
-        E = temp[1]
+        B = int(temp[0])
+        E = int(temp[1])
         name = temp[2]
-        L = temp[3]
+        L = int(temp[3])
         streets[name] = Street(B, E, name, L)
     ns.streets = streets
 
     paths = {}
     for i in range(ns.V):
         temp = next(itr).split()
-        P = temp[0]
+        P = int(temp[0])
         ls = temp[1:]
         paths[i] = Path_c(P, ls)
     ns.paths = paths
@@ -66,6 +66,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('inp', nargs='?')
     return parser.parse_args()
+
 
 """
 inp = '''6 4 5 2 1000
