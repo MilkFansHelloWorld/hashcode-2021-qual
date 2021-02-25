@@ -8,6 +8,17 @@ from util import get_in_file_content
 
 # inp is an input file as a single string
 # return your output as a string
+
+class Graph:
+    def __init__(self, edges):
+        self.adj_list = {}
+        for street in edges:
+            if street.B not in self.adj_list:
+                self.adj_list[street.B] = []
+            self.adj_list[street.B].append(street)
+        self.vertices = self.adj_list.keys()
+        self.edges = edges
+
 def solve(inp, args):
     # TODO: Solve the problem
     random.seed(args['seed'])
