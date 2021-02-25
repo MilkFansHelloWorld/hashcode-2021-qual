@@ -59,9 +59,13 @@ def solve(inp, args):
             # print(street_list)
             # max_freq = street_list[0][1]
             # min_freq = street_list[-1][1]
-            street_list_corrected = [(street_name, freq) for (index, (street_name, freq)) in enumerate(street_list)]
+            #street_list_corrected = [(street_name, freq) for (index, (street_name, freq)) in enumerate(street_list)]
             # street_list_corrected = [(street_name, 1) for (index, (street_name, freq)) in enumerate(street_list)]
-            lambda_val = min(10, ns.D / 100)
+            street_list_corrected = []
+            if len(street_list) > 1 and street_list[0][1] > 5*street_list[1][1]:
+                street_list_corrected = [(street_name, freq) for (index, (street_name, freq)) in enumerate(street_list)]
+            else:
+                street_list_corrected = [(street_name, 4-int(index/3)) for (index, (street_name, freq)) in enumerate(street_list)]
             # street_list_corrected = [(street_name, max(1, int(lambda_val*math.exp(-lambda_val*index)))) for (index, (street_name, freq)) in enumerate(street_list)]
             for (street_name, corrected_freq) in street_list_corrected:
                 res.append('{} {}'.format(street_name, max(corrected_freq, 1)))
