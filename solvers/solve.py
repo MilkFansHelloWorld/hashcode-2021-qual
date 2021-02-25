@@ -5,6 +5,7 @@ sys.path.extend(['..', '.'])
 from collections import *
 from dataparser import parse
 from util import get_in_file_content
+from queue import Queue
 
 # inp is an input file as a single string
 # return your output as a string
@@ -15,7 +16,7 @@ class Graph:
         for street in edges:
             if street.B not in self.adj_list:
                 self.adj_list[street.B] = []
-            self.adj_list[street.B].append(street)
+            self.adj_list[street.B].append((street, Queue()))
         self.vertices = self.adj_list.keys()
         self.edges = edges
 
