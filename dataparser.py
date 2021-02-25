@@ -32,13 +32,13 @@ def parse(inp):
 
     ns.D, ns.I, ns.S, ns.V, ns.F = nl(itr)
     streets = {}
-    for i in range(ns.S):
+    for _ in range(ns.S):
         temp = next(itr).split()
         B = temp[0]
         E = temp[1]
         name = temp[2]
         L = temp[3]
-        streets[i] = Street(B, E, name, L)
+        streets[name] = Street(B, E, name, L)
     ns.streets = streets
 
     paths = {}
@@ -67,6 +67,7 @@ def get_args():
     parser.add_argument('inp', nargs='?')
     return parser.parse_args()
 
+"""
 inp = '''6 4 5 2 1000
 2 0 rue-de-londres 1
 0 1 rue-d-amsterdam 1
@@ -76,5 +77,5 @@ inp = '''6 4 5 2 1000
 4 rue-de-londres rue-d-amsterdam rue-de-moscou rue-de-rome
 3 rue-d-athenes rue-de-moscou rue-de-londres'''
 
-parse(inp)
+parse(inp)"""
 
