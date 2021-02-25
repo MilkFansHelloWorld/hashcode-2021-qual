@@ -10,11 +10,44 @@ def ni(itr):
 def nl(itr):
     return [int(v) for v in next(itr).split()]
 
+class Street:
+    def __init__(self, B, E, name, L):
+        self.B = B
+        self.E = E
+        self.name = name
+        self.L = L
+        return
+
+class Path_c:
+    def __init__(self, P, street_name_ls):
+        self.P = P
+        self.st_names = street_name_ls
+        return
+
+
 
 def parse(inp):
     itr = (line for line in inp.split('\n'))
     ns = argparse.Namespace()
-    # TODO: fill ns
+
+    ns.D, ns.I, ns.S, ns.V, ns.F = nl(itr)
+    streets = {}
+    for i in range(ns.S):
+        temp = next(itr).split()
+        B = temp[0]
+        E = temp[1]
+        name = temp[2]
+        L = temp[3]
+        streets[i] = Street(B, E, name, L)
+    ns.streets = streets
+
+    paths = {}
+    for i in range(ns.V):
+        temp = next(itr).split()
+        P = temp[0]
+        ls = temp[1:]
+        paths[i] = Path_c(P, ls)
+    ns.paths = paths
 
     return ns
 
@@ -34,15 +67,14 @@ def get_args():
     parser.add_argument('inp', nargs='?')
     return parser.parse_args()
 
+inp = '''6 4 5 2 1000
+2 0 rue-de-londres 1
+0 1 rue-d-amsterdam 1
+3 1 rue-d-athenes 1
+2 3 rue-de-rome 2
+1 2 rue-de-moscou 3
+4 rue-de-londres rue-d-amsterdam rue-de-moscou rue-de-rome
+3 rue-d-athenes rue-de-moscou rue-de-londres'''
 
-if __name__ == '__main__':
-    args = get_args()
-    if args.inp:
-        file_list = [args.inp]
-    else:
-        file_list = Path('in').glob('*.in')
+parse(inp)
 
-    for inp in file_list:
-        data = parse2json(inp.read_text())
-        with inp.with_suffix('.json').open('w') as f:
-            f.write(data)
